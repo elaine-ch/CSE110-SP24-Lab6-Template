@@ -8,7 +8,7 @@
 
 **Answer:** No
 
-**Explanation:** Checking if a small portion of the code is functioning as intended is a job suited more towards unit testing. E2E Testing is used to check the overall functionality of a webpage from the perspective of a user. E2E tests provide a more wholistic view of the page's functionality, while unit tests are more suited towards checking smaller portions and individual functions of the code.
+**Explanation:** Checking if a small portion of the code is functioning as intended is a job suited more towards unit testing. E2E Testing is used to check the overall functionality of a webpage from the perspective of a user. E2E tests provide a more wholistic view of the page's overall functionality, while unit tests are more suited towards checking smaller portions and individual functions of the code.
 
 
 
