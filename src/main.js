@@ -12,28 +12,28 @@ getNotes().forEach(note => {
 document.addEventListener("keydown", (event) => deleteAllNotes(event));
 
 //UI button change feature
-addNoteButton.addEventListener("mouseover", ()=> {
+addNoteButton.addEventListener("mouseover", () => {
     addNoteButton.textContent = "+";
 });
-addNoteButton.addEventListener("mouseout", () => { 
-    addNoteButton.textContent = "Add Note"; 
+addNoteButton.addEventListener("mouseout", () => {
+    addNoteButton.textContent = "Add Note";
 });
 
 addNoteButton.addEventListener("click", () => addNote());
 
 //Creates new note elements
-function createNoteElement(id, content){
+function createNoteElement(id, content) {
 
     const element = document.createElement("textarea");
 
     element.classList.add("note");
     element.value = content;
     element.placeholder = "New Note";
-    
-    element.addEventListener("change", () =>{
+
+    element.addEventListener("change", () => {
         updateNote(id, element.value);
     });
-   
+
     element.addEventListener("dblclick", () => {
         deleteNote(id, element);
     });
@@ -42,7 +42,7 @@ function createNoteElement(id, content){
 }
 
 //Adds new Notes to page
-function addNote(){
+function addNote() {
 
     const notes = getNotes();
     const noteObject = {
@@ -57,7 +57,7 @@ function addNote(){
     noteCount++
 }
 
-//updates content of given note
+//Updates Note with new given content
 function updateNote(id, newContent) {
     notes = getNotes();
     updatedNote = getNote(notes, id);
@@ -70,18 +70,18 @@ function getNotes() {
     return JSON.parse(localStorage.getItem("stickynotes-notes") || "[]");
 }
 
-//Get a certain note based of id, and notes array
+//Get a certain note based of id
 function getNote(notes, id) {
     return notes.filter(note => note.id == id)[0];
 }
 
 //Saves all notes to local storage
-function saveNotes(notes){
-    localStorage.setItem("notesApp-notes", JSON.stringify(notes));
+function saveNotes(notes) {
+    localStorage.setItem("stickynotes-notes", JSON.stringify(notes));
 }
 
 //Deletes a single specific note with double click
-function deleteNote(id, element){
+function deleteNote(id, element) {
     const notes = getNotes().filter(note => note.id != id);
     saveNotes(notes);
     notesContainer.removeChild(element);
@@ -89,10 +89,10 @@ function deleteNote(id, element){
 }
 
 //deletes all notes with crt + shift + D
-function deleteAllNotes(event){
+function deleteAllNotes(event) {
     if (event.ctrlKey && event.shiftKey && event.key === 'D') {
-        if(confirm("Do you want to delete all notes")){
-            for(var i = 0; i < noteCount; i++){
+        if (confirm("Do you want to delete all notes")) {
+            for (var i = 0; i < noteCount; i++) {
                 notesContainer.removeChild(notesContainer.lastChild);
             }
             saveNotes(JSON.parse("[]"));
