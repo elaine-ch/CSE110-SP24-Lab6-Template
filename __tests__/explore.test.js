@@ -71,6 +71,50 @@ describe('Basic user flow for Website', () => {
 
     }, 10000);
 
+    it('checking existing note works as intended', async () => {
+        console.log('checking existing note works as intended...');
+
+        const getNotes = await page.evaluate(() => {
+            const noteElement = document.querySelector('.note');
+            return noteElement;
+        });
+        const item = getNotes;
+        await page.click('.note');
+        console.log('item is' + item);
+
+        await page.evaluate(() => {
+            const noteElement = document.querySelector('.note');
+            noteElement.value = "This is an edited note 2.0";
+        });
+        await page.keyboard.press('Tab');
+
+        // Check if the edited content is saved
+        const editedContentSavedClickBody = await page.evaluate(() => {
+            const noteElement = document.querySelector('.note');
+            return noteElement.value === "This is an edited note 2.0";
+        });
+
+        console.log("Edited content saved - tab:", editedContentSavedClickBody);
+
+        await page.evaluate(() => {
+            const noteElement = document.querySelector('.note');
+            noteElement.value = "This is an edited note again 2.0";
+        });
+
+        await page.click('body');
+
+        const editedContentSavedTab = await page.evaluate(() => {
+            const noteElement = document.querySelector('.note');
+            return noteElement.value === "This is an edited note again 2.0";
+        });
+
+        console.log("Edited content saved - click outside:", editedContentSavedTab);
+        expect(editedContentSavedTab).toBe(true);
+        expect(editedContentSavedClickBody).toBe(true);
+
+    }, 2500);
+
+    // check if number of notes is same after reload
     it('Checking number of notes is same after reload', async () => {
         console.log('Checking number of notes is same after reload...');
         const numBeforeReload = await page.$$eval('#notes-app > *', notes => notes.length);
@@ -102,7 +146,7 @@ describe('Basic user flow for Website', () => {
             return notesFromLocalStorage;
         });
 
-        // expect(isNoteDeleted).toBe(true);
+        expect(isNoteDeleted).toBe(true);
         // one is add note button. One is deleted note
         expect(numLocalStorageNotes).toBe(numNotesBeforeDelete - 2);
     }, 10000);
