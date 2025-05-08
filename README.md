@@ -1,4 +1,4 @@
-# Explore: More testing with CRUD Apps
+# More testing with CRUD Apps
 
 In this part of the lab, we will want you to create some E2E tests for the notetaking CRUD app provided (to launch the website, open **index.html** with Live Server or use [this link](https://elaine-ch.github.io/CSE110-SP24-Lab6-Template/)). It is a simple note taker app with some basic functionality, and it will be left up to you as to how testing should be conducted. The rest of the source code for the notetaking app can be found in the **src** folder. We will require you to create multiple tests to make sure all the different aspects of the app are working properly together, so make sure your tests cover all the features of the app in order to receive full credit. We suggest looking through the code and to play around with the app itself to help you decide what to test.
 
